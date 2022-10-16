@@ -1,8 +1,9 @@
 import pygame
 from pygame.draw import rect
 from SpriteSheet import SpriteSheet
-from store_sprite_instances import store_sprite_instances
 
+# Global Variables
+from store_sprite_instances import store_sprite_instances
 WIDTH = 1280
 HEIGHT = 720
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -10,12 +11,13 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 # Load Images
 knight = pygame.image.load(
     "/Users/kiang/PycharmProjects/pythonProject/PygameStuff/Player/HighResRomanKnight.png").convert()  # surface 52 by 72
-knight_attack = pygame.image.load(
-    "/Users/kiang/PycharmProjects/pythonProject/PygameStuff/Player/KnightAttackAnimations.png").convert()  # surface 52 by 72
+knight_one_two = pygame.image.load(
+    "/Users/kiang/PycharmProjects/pythonProject/PygameStuff/Player/KnightOneTwoCombo2.png").convert()
+
 knight_img = store_sprite_instances(knight, 3, 4, 52, 72)
-knight_img2 = store_sprite_instances(knight_attack, 4, 4, 52, 72)
+knight_img3 = store_sprite_instances(knight_one_two, 4, 4, 52, 72)
 blah = knight_img.sprite_dict()
-KnightAttMode = knight_img2.sprite_dict()
+KnightOneTwo = knight_img3.sprite_dict()
 
 
 class Protagonist(pygame.sprite.Sprite):
@@ -89,13 +91,13 @@ class Protagonist(pygame.sprite.Sprite):
                 self.image = blah.get('move_right')[1]
         
         elif self.default_state == "Alert":
-            if now - self.last_updated > 100:
+            if now - self.last_updated > 60:
                 self.last_updated = now
-                self.current_frame = (self.current_frame + 1) % len(KnightAttMode.get('alert_right'))
+                self.current_frame = (self.current_frame + 1) % len(KnightOneTwo.get('attack_left'))
                 if self.attacking and self.facing_left:
-                    self.image = KnightAttMode.get('attack_left')[self.current_frame]
+                    self.image = KnightOneTwo.get('attack_left')[self.current_frame]
                 if self.attacking and self.facing_right:
-                    self.image = KnightAttMode.get('attack_right')[self.current_frame]
+                    self.image = KnightOneTwo.get('attack_right')[self.current_frame]
         
         elif self.default_state == 'Moving':
             if now - self.last_updated > 150:
