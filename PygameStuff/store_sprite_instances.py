@@ -1,8 +1,9 @@
 import pygame
+#Stores lists of different character images as
+# A list of Surfaces.
 
 class store_sprite_instances:
-
-    def __init__(self, surface, cols, rows, width, height, ):
+    def __init__(self, surface, cols, rows, width, height):
         self.surface = surface
         self.direction_sprites = {}
         self.image_store_up = []
