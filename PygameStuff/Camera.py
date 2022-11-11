@@ -1,15 +1,8 @@
 import pygame
-import os
-import random
-import time
-from SpriteSheet import SpriteSheet
-from Protagonist import Protagonist
-from pytmx import load_pygame
-
 
 class CameraGroup(pygame.sprite.Group):
     def __init__(self, main_map_surface):
-        super().__init__()
+        super().__init__()  # Initialise parent class attributes (Group)
         self.display_surface = pygame.display.get_surface()
         self.main_map = main_map_surface
         self.main_map_rect = main_map_surface.get_rect() # 0,0,3200,3200 coordingates
@@ -20,12 +13,11 @@ class CameraGroup(pygame.sprite.Group):
         self.half_h = self.display_surface.get_size()[1] // 2 # 600/ 2 = 300
     
     def center_target_camera(self, target):
-        self.offset.x = target.rect.centerx - self.half_w
-        self.offset.y = target.rect.centery - self.half_h
+        self.offset.x = (target.rect.centerx - self.half_w)
+        self.offset.y = (target.rect.centery - self.half_h)
         
     def custom_draw(self, target):
         self.center_target_camera(target)
-        #Display the Map sprite
-        self.display_surface.blit(self.main_map, (self.main_map_rect.x - self.offset.x , self.main_map_rect.y - self.offset.y ))
-        #Display the character sprite
+        # Display the Map sprite
+        self.display_surface.blit(self.main_map, ((self.main_map_rect.x - self.offset.x), (self.main_map_rect.y - self.offset.y )))
         self.display_surface.blit(target.image, (target.rect.centerx - self.offset.x,target.rect.centery - self.offset.y) )
