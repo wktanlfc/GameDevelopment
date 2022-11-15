@@ -12,14 +12,9 @@ WIDTH = 1600
 HEIGHT = 1000
 screen = pygame.display.set_mode((WIDTH, HEIGHT)) # Window Size
 screen.fill((255,255,255))
-
+#
 # for layer in tiled_map.visible_layers:
 #    print(layer)
-
-# for x, y, image in tiled_map.get_layer_by_name('Buildings Architecture').tiles():
-#     print(x) # your tile x position 32nd tile from left
-#     print(y)
-#     image
 
 
 # note x and y give you the position of the tiles, not the actual position on the screen. For that, multiplly by the size of each tile.

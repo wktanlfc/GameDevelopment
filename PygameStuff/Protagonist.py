@@ -4,9 +4,9 @@ from SpriteSheet import SpriteSheet
 
 # Global Variables
 from store_sprite_instances import store_sprite_instances
-WIDTH = 1200
-HEIGHT = 1000
-WIN = pygame.display.set_mode((800, 600))
+# WIDTH = 1600
+# HEIGHT = 1000
+WIN = pygame.display.set_mode((1600, 1000))
 # Load Images
 knight = pygame.image.load(
     "/Users/kiang/PycharmProjects/pythonProject/PygameStuff/Player/HighResRomanKnight.png").convert()  # surface 52 by 72
@@ -23,9 +23,9 @@ class Protagonist(pygame.sprite.Sprite):
     def __init__(self,tile_pos_x, tile_pos_y):
         pygame.sprite.Sprite.__init__(self)
         self.image = blah.get('move_down')[0]
-        self.rect = self.image.get_rect()   # Get the width and the height of the surface of image above.
-        self.rect.centerx = int(32*tile_pos_x) # int(WIDTH/2) # this 2 parameters place my player on the center of the 800 x 600 screen.
-        self.rect.centery = int(32*tile_pos_y) # int(HEIGHT/2) # this 2 parameters place my player on the center of the 800 x 600 screen.
+        self.rect = pygame.Rect(tile_pos_x , tile_pos_y , 32, 32)  # Since get.image.rect returns 52 x 72, dont use. create own 32 x 64 rect.
+        self.rect.centerx = int((tile_pos_x*2)/2 * 32) # int(WIDTH/2) # this 2 parameters place my player on the center of the 800 x 600 screen.
+        self.rect.centery = int((tile_pos_y*2)/2 * 32) # int(HEIGHT/2) # this 2 parameters place my player on the center of the 800 x 600 screen.
         self.attacking = False
         self.move_left = False
         self.move_right = False
@@ -58,8 +58,15 @@ class Protagonist(pygame.sprite.Sprite):
         if keystate[pygame.K_s]:
             self.velocity_y = self.speed
             self.facing_down = True
+        # For checking purposes -------------------------------------
         if keystate[pygame.K_SPACE]:
-            self.attacking = True
+            # self.attacking = True
+            self.rect.centerx = int((0 * 2 + 1) / 2 * 32)
+            self.rect.centery = int((0 * 2 + 1) / 2 * 32)
+        if keystate[pygame.K_c]:
+            self.rect.centerx = int((67 * 2 + 1) / 2 * 32)
+            self.rect.centery = int((26 * 2 + 1) / 2 * 32)
+        # -----------------------------------------------------------
         self.rect.centerx += self.velocity_x
         self.rect.centery += self.velocity_y
         self.set_state()
