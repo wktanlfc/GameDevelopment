@@ -11,7 +11,7 @@ class ObjectSprites(pygame.sprite.Sprite):
         self.h = height_in_tiles
         self.image = pygame.Surface((self.w * self.tileSize, self.h * self.tileSize)).convert_alpha()
         # self.image.fill((0, 255, 255))
-        self.rect = self.image.get_rect(topleft= (_Xcoord * self.tileSize, _Ycoord * self.tileSize))
+        self.rect = self.image.get_rect(topleft= (_Xcoord * self.tileSize, _Ycoord * self.tileSize - 32))
         
 
 class CollisionSprites(pygame.sprite.Sprite):
